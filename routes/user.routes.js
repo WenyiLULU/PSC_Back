@@ -22,7 +22,7 @@ router.put('/:userId', async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(userId, newData)
 
-    res.status(201).json({ message: 'New pet added', id: pet.id })
+    res.status(201).json({ message: 'User profile updated', name: user.username })
   } catch (error) {
     res.status(500).json(error)
   }
