@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { isAuthenticated } = require('../middlewares/jwt.middleware')
+const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 const User = require('../models/User.model')
 
@@ -19,7 +19,7 @@ router.post('/signup', async (req, res, next) => {
 
   const passwordHash = bcryptjs.hashSync(password, randomSalt)
 
-  newUser.passwordHash = passwordHash
+  newUser.passwordHashed = passwordHash
   try {
     await User.create(newUser)
     res.status(201).json({ message: 'New user created', status: 'OK' })
@@ -41,15 +41,15 @@ router.post('/login', async (req, res, next) => {
   if (user === null) {
     res.status(404).json({ message: 'User not found', status: 'KO' })
   } else {
-    const { passwordHash, createdAt, updatedAt } = user
-    if (bcryptjs.compareSync(password, passwordHash)) {
-      const tempUser = { username, createdAt, updatedAt }
+    const { passwordHashed, createdAt, updatedAt } = user
+    if (bcryptjs.compareSync(password, passwordHashed)) {
+      const tempUser = { email, createdAt, updatedAt }
       //delete tempUser.passwordHash
       const token = jwt.sign(tempUser, process.env.TOKEN_SECRET, {
         algorithm: 'HS256',
         expiresIn: '6h',
       })
-      res.status(200).json({ token })
+      res.status(200).json({tempUser, token })
     } else {
       res.status(403).json({ message: 'Wrong password', status: 'KO' })
     }
