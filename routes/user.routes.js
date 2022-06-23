@@ -6,7 +6,8 @@ router.get("/:userId", async (req, res, next) => {
     try {
         const { userId }= req.params
         const userInfo = await User.findById(userId)
-        res.status(200).json({ message: 'User find', name: userInfo.username });
+        
+        res.json(userInfo)
 
     } catch (error){
         res.status(500).json(error)

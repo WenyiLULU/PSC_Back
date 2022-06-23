@@ -7,23 +7,26 @@ router.get("/", async (req, res, next) => {
   res.json(pets)
 });
 
+
+// Create a new pet
+router.post('/create', async (req, res, next) => {
+  
+  try {
+    
+    const pet = await Pet.create(req.body)
+
+    res.status(201).json({ message: 'New pet added', id: pet.id, name: pet.name })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
+
 // one pet
 router.get("/:petId", async (req, res, next) => {
   const { petId } = req.params
   const pet = await Pet.findById(petId)
   res.json(pet)
 });
-
-// Create a new pet
-router.post('/create', async (req, res, next) => {
-  try {
-    const pet = await Pet.create(req.body)
-
-    res.status(201).json({ message: 'New pet added', id: pet.id })
-  } catch (error) {
-    res.status(500).json(error)
-  }
-})
 
 // Update a pet
 router.put('/:petId', async (req, res, next) => {
