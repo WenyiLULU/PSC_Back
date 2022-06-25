@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require('../models/User.model')
+const bcryptjs = require('bcryptjs')
+
 
 // get user infos by id
 router.get("/:userId", async (req, res, next) => {
@@ -28,6 +30,33 @@ router.put('/:userId', async (req, res, next) => {
     res.status(500).json(error)
   }
 })
+
+// change password
+router.put('/:userId/password', async (req, res, next) => {
+  const { userId }= req.params
+  const { currentPassword, newPassword } = req.body
+  
+try {
+  const user = await User.findById(userId)
+  const {passwordHashed} = user
+  if (bcryptjs.compareSync(currentPassword, passwordHashed)) {
+    const randomSalt = bcryptjs.genSaltSync(10)
+
+    const newPasswordHash = bcryptjs.hashSync(newPassword, randomSalt)
+    const newPasswordHashed = {passwordHashed : newPasswordHash}
+    try {
+      const userWithNewKey = await User.findByIdAndUpdate(userId, newPasswordHashed)
+      res.status(201).json({ message: 'User profile updated', name: userWithNewKey.username })
+      } catch (error) { res.status(500).json(error) }
+
+    } else {
+    res.status(403).json({ message: 'Wrong current password', status: 'KO' })
+  }  
+} catch (error) {
+  res.status(500).json(error)
+}
+})
+
 
 
 
