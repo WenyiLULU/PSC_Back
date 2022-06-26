@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 const Pet = require("../models/Pet.model");
 
 // all the pets
@@ -9,24 +10,23 @@ router.get("/", async (req, res, next) => {
 
 // Create a new pet
 router.post("/create", async (req, res, next) => {
-  const { name, age, category, size } = req.body;
+  const { name, age, category, size, userId } = req.body;
   console.log("body from frontend: ", req.body);
-  const userObjectId = mongoose.Types.ObjectId(userInSession._id);
-  // try {
-  //   const pet = await Pet.create({
-  //     name: name.trim(),
-  //     age: parseInt(age),
-  //     category: category.trim(),
-  //     size: size.trim(),
-  //     owner: userObjectId,
-  //   });
+  const userObjectId = mongoose.Types.ObjectId(userId);
+  console.log("Owner Id: ", userObjectId);
+  try {
+    const pet = await Pet.create({
+      name: name.trim(),
+      age: parseInt(age),
+      category: category.trim(),
+      size: size.trim(),
+      owner: userObjectId,
+    });
 
-  //   res
-  //     .status(201)
-  //     .json({ message: "New pet added", id: pet.id, name: pet.name });
-  // } catch (error) {
-  //   res.status(500).json(error);
-  // }
+    res.status(201).json({ message: "New pet added", pet });
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 // one pet
