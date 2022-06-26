@@ -19,6 +19,7 @@ router.get('/:availId', async (req, res, next) => {
 //create new
 router.post('/create', async (req, res, next) => {
     try {
+      console.log('Hello!')
       const avail = await Avail.create(req.body)
   
       res.status(201).json({ message: 'New availability created', id: avail.id })

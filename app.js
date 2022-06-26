@@ -30,7 +30,7 @@ const commentRoutes = require("./routes/comment.routes");
 app.use("/api/comment", isAuthenticated, commentRoutes);
 
 const availRoutes = require("./routes/avail.routes");
-app.use("/api/availability", isAuthenticated, availRoutes);
+app.use("/api/avail", isAuthenticated, availRoutes);
 
 const appointRoutes = require("./routes/appointment.routes");
 app.use("/api/appointment", isAuthenticated, appointRoutes);
