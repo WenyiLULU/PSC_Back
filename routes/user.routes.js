@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require('../models/User.model')
 const bcryptjs = require('bcryptjs')
 
+const fileUploader = require("../config/cloudinary.config")
 
 // get user infos by id
 router.get("/:userId", async (req, res, next) => {
@@ -18,10 +19,13 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 // update user profile
-router.put('/:userId', async (req, res, next) => {
+router.put('/:userId', fileUploader.single("user-image"), async (req, res, next) => {
     const { userId }= req.params
-    const { username, email, country, city, image, owner, sitter, pets, description, experience } = req.body
-    const newData = { username, email, country, city, image, owner, sitter, pets, description, experience }
+    const { username, email, country, city, owner, sitter, pets, description, experience } = req.body
+    const newData = { username, email, country, city, owner, sitter, pets, description, experience }
+    if(req.file){
+      newData.image = req.file.path
+    }
   try {
     const user = await User.findByIdAndUpdate(userId, newData)
 
