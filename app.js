@@ -21,7 +21,7 @@ const allRoutes = require("./routes/index.routes");
 app.use("/api", allRoutes);
 
 const petRoutes = require("./routes/pet.routes");
-app.use("/api/pet", petRoutes);
+app.use("/api/pet", isAuthenticated, petRoutes);
 
 const userRoutes = require("./routes/user.routes");
 app.use("/api/user", isAuthenticated, userRoutes);
