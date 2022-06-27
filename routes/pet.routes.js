@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const Pet = require("../models/Pet.model");
 
 // all the pets
@@ -12,15 +12,15 @@ router.get("/", async (req, res, next) => {
 router.post("/create", async (req, res, next) => {
   const { name, age, category, size, userId } = req.body;
   console.log("body from frontend: ", req.body);
-  const userObjectId = mongoose.Types.ObjectId(userId);
-  console.log("Owner Id: ", userObjectId);
+  // const userObjectId = mongoose.Types.ObjectId(userId);
+  // console.log("Owner Id: ", userObjectId);
   try {
     const pet = await Pet.create({
       name: name.trim(),
       age: parseInt(age),
       category: category.trim(),
       size: size.trim(),
-      owner: userObjectId,
+      owner: userId,
     });
 
     res.status(201).json({ message: "New pet added", pet });
