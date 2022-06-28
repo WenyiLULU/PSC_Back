@@ -10,21 +10,15 @@ router.get("/", async (req, res, next) => {
 
 // Create a new pet
 router.post("/create", async (req, res, next) => {
-  const { name, age, category, size, userId } = req.body;
-  console.log("body from frontend: ", req.body);
   // const userObjectId = mongoose.Types.ObjectId(userId);
   // console.log("Owner Id: ", userObjectId);
   try {
-    const pet = await Pet.create({
-      name: name.trim(),
-      age: parseInt(age),
-      category: category.trim(),
-      size: size.trim(),
-      owner: userId,
-    });
+    console.log("Trying to add a pet: ", req.body);
+    const pet = await Pet.create(req.body);
 
-    res.status(201).json({ message: "New pet added", pet });
+    res.status(201).json({ message: "New pet added", id: pet.id });
   } catch (error) {
+    console.log("error: ", error);
     res.status(500).json(error);
   }
 });
@@ -57,7 +51,7 @@ router.put("/:petId", async (req, res, next) => {
 
   try {
     const pet = await Pet.findByIdAndUpdate(petId, req.body);
-    res.status(200).json({ message: "Pet info updated", id: pet.id });
+    res.status(200).json({ message: "Pet info updated" });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -68,7 +62,7 @@ router.delete("/:petId", async (req, res, next) => {
   const { petId } = req.params;
 
   await Pet.findByIdAndDelete(petId);
-  res.status(200).json({ message: `${pet.name} said goodbye` });
+  res.status(200).json({ message: `your pet said goodbye` });
 });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const User = require('./User.model')
 
 // TODO: Please make sure you edit the availability model to whatever makes sense in this case
 const availabilitySchema = new Schema(
@@ -9,10 +10,7 @@ const availabilitySchema = new Schema(
     endDate: {
         type: Date, 
         required: [true, 'Please enter a end date']},
-    author: {
-        type: Schema.Types.ObjectId, 
-        ref: 'User',
-        required: true},
+    author: {type: Schema.Types.ObjectId, ref: 'User'},
     actionType: {
         type: String,
         enum: ['offer', 'request']},
