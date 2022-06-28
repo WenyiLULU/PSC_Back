@@ -4,7 +4,7 @@ const router = require('express').Router()
 
 //get all
 router.get('/', async (req, res, next) => {
-    const allAvail = await Avail.find()
+    const allAvail = await Avail.find().populate('author')
     res.json(allAvail)
   })
 

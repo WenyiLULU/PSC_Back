@@ -11,8 +11,7 @@ const availabilitySchema = new Schema(
         required: [true, 'Please enter a end date']},
     author: {
         type: Schema.Types.ObjectId, 
-        ref: 'User',
-        required: true},
+        ref: 'User'},
     actionType: {
         type: String,
         enum: ['offer', 'request']},
