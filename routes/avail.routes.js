@@ -5,6 +5,7 @@ const router = require('express').Router()
 //get all
 router.get('/', async (req, res, next) => {
     const allAvail = await Avail.find().populate('author')
+    console.log("Hello!", allAvail)
     res.json(allAvail)
   })
 
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:availId', async (req, res, next) => {
     const { availId } = req.params
   
-    const avail = await Avail.findById(availId)
+    const avail = await Avail.findById(availId).populate('author')
     res.json(avail)
   })
 
