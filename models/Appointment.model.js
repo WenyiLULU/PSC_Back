@@ -26,7 +26,7 @@ const appointmentSchema = new Schema(
         type: Schema.Types.ObjectId, 
         ref: "User" }],
     pets: [{ 
-        type: Schema.Types.ObjectId, 
+        type: Schema.Types.ObjectId,  
         ref: "Pet" }],
     // private: boolean,
   },
