@@ -5,6 +5,7 @@ const router = require("express").Router();
 //get all
 router.get("/", async (req, res, next) => {
   const allApp = await Appointments.find().populate("creator pets");
+
   // allApp.populate('participant')
   console.log("all:", allApp);
   res.json(allApp);
