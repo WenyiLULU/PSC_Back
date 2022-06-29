@@ -51,7 +51,7 @@ router.put("/:petId", async (req, res, next) => {
 
   try {
     const pet = await Pet.findByIdAndUpdate(petId, req.body);
-    res.status(200).json({ message: "Pet info updated", id: pet.id });
+    res.status(200).json({ message: "Pet info updated" });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -62,7 +62,7 @@ router.delete("/:petId", async (req, res, next) => {
   const { petId } = req.params;
 
   await Pet.findByIdAndDelete(petId);
-  res.status(200).json({ message: `${pet.name} said goodbye` });
+  res.status(200).json({ message: `your pet said goodbye` });
 });
 
 module.exports = router;
