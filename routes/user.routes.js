@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User.model");
 const bcryptjs = require("bcryptjs");
-fileUploader = require("../config/cloudinary.config");
+const fileUploader = require("../config/cloudinary.config");
 
 // get user infos by id
 router.get("/:userId", async (req, res, next) => {
