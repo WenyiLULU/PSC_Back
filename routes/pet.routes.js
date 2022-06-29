@@ -1,6 +1,7 @@
 const router = require("express").Router();
 // const mongoose = require("mongoose");
 const Pet = require("../models/Pet.model");
+const fileUploader = require("../config/cloudinary.config");
 
 // all the pets
 router.get("/", async (req, res, next) => {
@@ -64,5 +65,31 @@ router.delete("/:petId", async (req, res, next) => {
   await Pet.findByIdAndDelete(petId);
   res.status(200).json({ message: `your pet said goodbye` });
 });
+
+// upload image
+router.post(
+  "/:petId/img",
+  fileUploader.single("petPhoto"),
+  async (req, res, next) => {
+    const { petId } = req.params;
+    console.log("req.body", req.body);
+    console.log("req.file", req.file);
+
+    if (req.file) {
+      newimage = req.file.path;
+    }
+    console.log("new image:", newimage);
+    try {
+      const pet = await Pet.findByIdAndUpdate(petId, {$addToSet: {img: [newimage]}}
+        );
+
+      res
+        .status(201)
+        .json({ message: "Pet photos updated", name: pet.name });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+);
 
 module.exports = router;
