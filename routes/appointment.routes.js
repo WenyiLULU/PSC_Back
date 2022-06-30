@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 //get all
 router.get("/", async (req, res, next) => {
-  const allApp = await Appointments.find().populate("creator pets");
+  const allApp = await Appointments.find().populate("creator participant pets");
 
   // allApp.populate('participant')
   console.log("all:", allApp);
@@ -16,7 +16,7 @@ router.get("/:appointID", async (req, res, next) => {
   const { appointID } = req.params;
 
   const app = await Appointments.findById(appointID).populate(
-    "creator participant"
+    "creator participant pets"
   );
   res.json(app);
 });

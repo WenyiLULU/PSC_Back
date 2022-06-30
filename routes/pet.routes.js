@@ -80,12 +80,11 @@ router.post(
     }
     console.log("new image:", newimage);
     try {
-      const pet = await Pet.findByIdAndUpdate(petId, {$addToSet: {img: [newimage]}}
-        );
+      const pet = await Pet.findByIdAndUpdate(petId, {
+        $addToSet: { img: [newimage] },
+      });
 
-      res
-        .status(201)
-        .json({ message: "Pet photos updated", name: pet.name });
+      res.status(201).json({ message: "Pet photos updated", name: pet.name });
     } catch (error) {
       res.status(500).json(error);
     }
