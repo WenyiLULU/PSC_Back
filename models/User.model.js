@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Pet = require("./Pet.model.js")
+const Pet = require("./Pet.model.js");
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema(
@@ -7,30 +7,35 @@ const userSchema = new Schema(
     username: {
       type: String,
       trim: true,
-      required: [true, 'Username is required.']  
+      required: [true, "Username is required."],
     },
-    email : {
+    email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, "Email is required."],
       unique: true,
-      match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'],
+      match: [/^\S+@\S+\.\S+$/, "Please use a valid email address."],
       lowercase: true,
-      trim: true
+      trim: true,
     },
-    
-    country: {type: String, trim: true, required: [true, 'Country is required.']},
-    city: {type: String, trim: true, required: [true, 'City is required.']},
+
+    country: {
+      type: String,
+      trim: true,
+      required: [true, "Country is required."],
+    },
+    city: { type: String, trim: true, required: [true, "City is required."] },
     passwordHashed: {
       type: String,
-      required : true
+      required: true,
     },
     image: {
       type: String,
-      default : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-kInj84qNz-MWcXqBgvrt5H8Lzj1w7TZNZQ&usqp=CAU"
+      default:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-kInj84qNz-MWcXqBgvrt5H8Lzj1w7TZNZQ&usqp=CAU",
     },
     owner: Boolean,
-    sitter:  Boolean,
-    pets:[{type: Schema.Types.ObjectId, ref: 'Pet'}],
+    sitter: Boolean,
+    pets: [{ type: Schema.Types.ObjectId, ref: "Pet" }],
     description: String,
     experience: String,
     //payment: Boolean
