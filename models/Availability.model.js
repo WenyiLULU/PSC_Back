@@ -14,8 +14,7 @@ const availabilitySchema = new Schema(
     actionType: {
         type: String,
         enum: ['offer', 'request']},
-    pets: [{ 
-          type: String }],
+    pets: [ String ],
     city: String,
     // place: Schema.Types.ObjectId, ref: 'Place',
   },
