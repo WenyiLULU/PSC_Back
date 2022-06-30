@@ -28,8 +28,8 @@ const userSchema = new Schema(
       type: String,
       default : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-kInj84qNz-MWcXqBgvrt5H8Lzj1w7TZNZQ&usqp=CAU"
     },
-    owner: Boolean,
-    sitter:  Boolean,
+    owner: {type: Boolean, default: false}, 
+    sitter: {type: Boolean, default: false},
     pets:[{type: Schema.Types.ObjectId, ref: 'Pet'}],
     description: String,
     experience: String,
