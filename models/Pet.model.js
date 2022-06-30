@@ -9,7 +9,13 @@ const petSchema = new Schema(
     },
     age: Number,
     breed: String,
-    img: [String],
+    img: [
+      {
+        type: String,
+        default:
+          "https://res.cloudinary.com/cocktail-lab/image/upload/v1656498682/pscImage/rwcotpwxgwvuv2t3zk4i.jpg",
+      },
+    ],
     habits: [String],
     specialNeeds: [String],
     owner: { type: Schema.Types.ObjectId, ref: "User" },
