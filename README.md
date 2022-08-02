@@ -1,4 +1,6 @@
-# Pet Social Club Back-end
+<img src="https://res.cloudinary.com/cocktail-lab/image/upload/v1659478720/pscImage/logo_v3_w_rg8t3u.png" alt="logo" width="100"/> 
+
+# Pet Social Club Back-end 
 
 ## Description
 PSC is an application that connects people looking for pet sitters to take care of their animals with users who are available to do so in a selected timeframe. 
@@ -10,6 +12,9 @@ The project was to create an online app with MERN stack. We used Express.js, Jav
 For this project, the back-end and front-end are seperated in two repositories.
 
 The website was first launched in July 2022 via Heroku and Netlify.
+
+<img src="https://res.cloudinary.com/cocktail-lab/image/upload/v1659479079/pscImage/homepage_hgdp0h.png" alt="homepage" width="800"/> 
+
 
 ## User Stories
 - **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault 
