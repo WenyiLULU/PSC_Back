@@ -101,7 +101,7 @@ The available endpoints are the following:
 
 [Front-end Deploy Link](https://petsocialclub.netlify.app/)
 
-[Back-end Deploy Link](https://pet-social-club.herokuapp.com/)
+[Back-end Deploy Link](https://psc-back-tofly.fly.dev/)
 
 ### Slides
 
